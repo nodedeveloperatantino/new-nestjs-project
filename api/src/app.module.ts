@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 // import { databaseProvider } from './database.provider';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       url: process.env.DATABASE_URL,
       autoLoadEntities: true,
       synchronize: true
-    })
+    }),
+    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService, /* ...databaseProvider */],
