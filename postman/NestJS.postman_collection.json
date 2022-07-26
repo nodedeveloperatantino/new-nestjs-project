@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"James Fort King\",\r\n    \"username\": \"fortknightking\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Dwayne Johnson\",\r\n    \"username\": \"dwaynetherock\",\r\n    \"email\": \"dwayne@therock.com\",\r\n    \"password\": \"dwayne@123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,13 +33,13 @@
 			"response": []
 		},
 		{
-			"name": "Update User By Id",
+			"name": "Login User",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"James Fort King\",\r\n    \"username\": \"fortknightking\"\r\n}",
+					"raw": "{\r\n    \"email\": \"dwayne@therock.com\",\r\n    \"password\": \"dwayne@123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -47,12 +47,40 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/users",
+					"raw": "{{url}}/users/login",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"users"
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User By Id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Dwayne Johnson\",\r\n    \"username\": \"dwayne_the_rock\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"2"
 					]
 				}
 			},
@@ -132,13 +160,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/users/2",
+					"raw": "{{url}}/users/1",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"users",
-						"2"
+						"1"
 					]
 				}
 			},
