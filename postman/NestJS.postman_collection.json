@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Dwayne Johnson\",\r\n    \"username\": \"dwaynetherock\",\r\n    \"email\": \"dwayne@therock.com\",\r\n    \"password\": \"dwayne@123\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Ravi Ranjan\",\r\n    \"username\": \"raviranjan007\",\r\n    \"email\": \"ravi@squaredr.com\",\r\n    \"password\": \"Ravi@123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -39,7 +39,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"dwayne@therock.com\",\r\n    \"password\": \"dwayne@123\"\r\n}",
+					"raw": "{\r\n    \"email\": \"ravi@squaredr.com\",\r\n    \"password\": \"Ravi@123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -66,7 +66,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Dwayne Johnson\",\r\n    \"username\": \"dwayne_the_rock\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Dwayne Johnson\",\r\n    \"username\": \"dwayne_the_rock\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -87,11 +87,49 @@
 			"response": []
 		},
 		{
+			"name": "Update User Role",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Dwayne Johnson\",\r\n    \"username\": \"dwayne_the_rock\",\r\n    \"role\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users/a9980df1-1ae0-4bce-88d6-67191ce4376b/role",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"a9980df1-1ae0-4bce-88d6-67191ce4376b",
+						"role"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get All Users",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -197,6 +235,11 @@
 		{
 			"key": "url",
 			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxMGZjOWMzLTE0ZjAtNGEyZi1iMjU0LTcyY2ZjOTE5NGZmOSIsIm5hbWUiOiJSYXZpIFJhbmphbiIsInVzZXJuYW1lIjoicmF2aXJhbmphbiIsImVtYWlsIjoicmF2aXJhbmphbkBzcXVhcmVkci5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NTg5MDQzMTAsImV4cCI6MTY1ODkwNzkxMH0.6vL7tjmfld1wIlZoQE7pQzST7dEQCU4ZY6lnX8-vrmU",
 			"type": "string"
 		}
 	]

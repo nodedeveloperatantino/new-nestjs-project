@@ -26,6 +26,7 @@ export class UsersService {
         newUser.username = createUserDto.username;
         newUser.email = createUserDto.email;
         newUser.password = passwordHash;
+        newUser.role = createUserDto.role;
         return from(this.userRepository.save(newUser)).pipe(
           map((user: User) => {
             const { password, ...result } = user;
@@ -49,7 +50,7 @@ export class UsersService {
     // return from(this.userRepository.find());
   }
 
-  findOne(id: number): Observable<User> {
+  findOne(id: string): Observable<User> {
     return from(this.userRepository.findOne({ where: { id } })).pipe(
       map((user: User) => {
         const { password, ...result } = user;
@@ -58,17 +59,17 @@ export class UsersService {
     );
   }
 
-  update(id: number, updateUserDto: UpdateUserDto): Observable<any> {
+  update(id: string, updateUserDto: UpdateUserDto): Observable<any> {
     return from(this.userRepository.update(id, updateUserDto));
   }
 
-  updateOne(id: number, User: CreateUserDto): Observable<any> {
+  updateOne(id: string, User: CreateUserDto): Observable<any> {
     delete User.email;
     delete User.password;
     return from(this.userRepository.update(id, User));
   }
 
-  remove(id: number): Observable<any> {
+  remove(id: string): Observable<any> {
     return from(this.userRepository.delete(id));
   }
 
@@ -103,5 +104,9 @@ export class UsersService {
 
   findByMail(email: string): Observable<User> {
     return from(this.userRepository.findOne({ where: { email } }));
+  }
+
+  updateRoleOfUser(id: string, user: User): Observable<any> {
+    return from(this.userRepository.update(id, user))
   }
 }
