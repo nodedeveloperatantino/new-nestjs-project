@@ -1,7 +1,15 @@
 export interface User {
-    id?: number,
+    id?: string,
     name?: string,
     username?: string,
     email?: string,
-    password?: string
+    password?: string,
+    role?: UserRole
+}
+
+export enum UserRole {
+    ADMIN = 'admin',
+    CHIEFEDITOR = 'chiefeditor',
+    EDITOR = 'editor',
+    USER = 'user'
 }

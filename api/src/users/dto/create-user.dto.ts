@@ -1,7 +1,10 @@
+import { UserRole } from "../models/user.interface";
+
 export interface CreateUserDto {
-    id?: number,
+    id?: string,
     name?: string,
     username?: string,
     email?: string,
-    password?: string
+    password?: string,
+    role?: UserRole
 }
