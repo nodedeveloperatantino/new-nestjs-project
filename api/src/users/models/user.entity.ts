@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { BeforeInsert, Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { UserRole } from "./user.interface";
 
@@ -19,7 +20,7 @@ export class UserEntity {
     @Column()
     password: string
 
-    @Column({type: 'enum', enum: UserRole, default: UserRole.USER})
+    @Column({type: 'enum', enum: UserRole, default: UserRole.CUSTOMER})
     role: UserRole
 
     @BeforeInsert()

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 export interface User {
     id?: string,
     name?: string,
@@ -9,7 +10,6 @@ export interface User {
 
 export enum UserRole {
     ADMIN = 'admin',
-    CHIEFEDITOR = 'chiefeditor',
-    EDITOR = 'editor',
-    USER = 'user'
+    BUSINESS = 'business',
+    CUSTOMER = 'customer'
 }
