@@ -2,7 +2,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable, switchMap, map, catchError, throwError } from 'rxjs';
+import { AccountEntity } from 'src/accounts/entities/account.entity';
 import { AuthService } from 'src/auth/services/auth.service';
+import { OperationEntity } from 'src/operation/models/operation.entity';
+import { OperationType } from 'src/operation/models/operation.interface';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
@@ -14,6 +17,12 @@ export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
+    
+    @InjectRepository(AccountEntity)
+    private readonly accountRepository: Repository<AccountEntity>,
+
+    @InjectRepository(OperationEntity)
+    private readonly operationRepository: Repository<OperationEntity>,
     private authService: AuthService,
   ) {}
 
@@ -23,18 +32,37 @@ export class UsersService {
     return this.authService.hashPassword(createUserDto.password).pipe(
       switchMap((passwordHash: string) => {
         const newUser = new UserEntity();
-        newUser.name = createUserDto.name;
+        newUser.name = createUserDto.fullName;
         newUser.username = createUserDto.username;
         newUser.email = createUserDto.email;
         newUser.password = passwordHash;
         newUser.role = createUserDto.role;
-        return from(this.userRepository.save(newUser)).pipe(
+
+        const newAccount = new AccountEntity();
+        newAccount.firstName = createUserDto.fullName.split(' ')[0];
+        newAccount.lastName = createUserDto.fullName.split(' ')[1];
+        newAccount.emailId = createUserDto.email;
+        newAccount.phoneNumber = createUserDto.phoneNumber;
+
+        newUser.account = newAccount;
+
+        const newOperation = new OperationEntity();
+        newOperation.operationType = OperationType.CAC;
+
+        newUser.operationRef = [newOperation];
+
+        from(this.accountRepository.save(newAccount));
+        from(this.operationRepository.save(newOperation));
+
+        const createUser = from(this.userRepository.save(newUser)).pipe(
           map((user: User) => {
             const { password, ...result } = user;
             return result;
           }),
           catchError((err) => throwError(err)),
         );
+
+        return createUser;
       }),
     );
   }

@@ -1,18 +1,26 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { OperationService } from '../services/operation.service';
 import { CreateOperationDto } from '../dto/create-operation.dto';
 import { UpdateOperationDto } from '../dto/update-operation.dto';
+import { hasRoles } from 'src/auth/decorator/roles.decorator';
+import { UserRole } from 'src/users/models/user.interface';
+import { JwtAuthGuard } from 'src/auth/guards/jwt.auth.guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('operation')
 export class OperationController {
   constructor(private readonly operationService: OperationService) {}
 
+  @hasRoles(UserRole.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Post()
   create(@Body() createOperationDto: CreateOperationDto) {
     return this.operationService.create(createOperationDto);
   }
 
+  @hasRoles(UserRole.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get()
   findAll() {
     return this.operationService.findAll();

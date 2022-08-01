@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -8,6 +9,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { OperationModule } from './operation/operation.module';
+import { TransactionsModule } from './transactions/transactions.module';
+import { AccountsModule } from './accounts/accounts.module';
 
 @Module({
   imports: [
@@ -20,7 +23,9 @@ import { OperationModule } from './operation/operation.module';
     }),
     UsersModule,
     AuthModule,
-    OperationModule
+    OperationModule,
+    TransactionsModule,
+    AccountsModule
   ],
   controllers: [AppController],
   providers: [AppService, /* ...databaseProvider */],

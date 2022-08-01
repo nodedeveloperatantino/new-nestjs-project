@@ -20,7 +20,7 @@ export class OperationService {
   }
 
   findAll() {
-    return `This action returns all operation`;
+    return from(this.operationRepository.find());
   }
 
   findOne(id: number) {

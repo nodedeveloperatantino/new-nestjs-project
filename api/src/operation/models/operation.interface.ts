@@ -2,19 +2,12 @@
 export interface Operation {
     id?: string,
     createdBy?: string,
-    digitalAmountCreated: number,
-    operationType?: OperationType,
-    gatewayType?: GatewayType,
-    referenceId?: string,               // If the payment has been done online or through bank transfer.
+    operationType?: OperationType,            // If the payment has been done online or through bank transfer.
 }   
 
 export enum OperationType {
-    CDC = 'create_digital_currency',
-    DDC = 'destroy_digital_currency',
-}
-
-export enum GatewayType {
-    CASH = 'cash_payment',
-    BANKTRANSFER = 'bank_transfer',
-    ONLINE = 'online_payment',
+    CDC = 'CREATE_DIGITAL_CURRENCY',
+    DDC = 'DESTROY_DIGITAL_CURRENCY',
+    CAC = 'CREATE_ACCOUNT',
+    ATU = 'ACCOUNT_TOP_UP'
 }
