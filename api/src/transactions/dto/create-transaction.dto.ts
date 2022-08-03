@@ -4,6 +4,9 @@ export interface CreateTransactionDto {
     from?: string;
     to?: string;
     amount?: number;
+    transactionType?: TransactionTypes;
+    description?: string;
+    fee?: number;
 }
 
 export enum TransactionTypes {
@@ -11,6 +14,7 @@ export enum TransactionTypes {
     CDC = 'CREATE_DIGITAL_CURRENCY',
     TAX = 'TAX_DEDUCTION',
     YAC = 'YASSIR_COMMISSION',
+    ATA = 'ACCOUNT_TO_ACCOUNT_FUND_TRANSFER'
 }
 
 

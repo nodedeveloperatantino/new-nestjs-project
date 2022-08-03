@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { AccountEntity } from "src/accounts/entities/account.entity";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { GatewayType, Status, TransactionTypes } from "../dto/create-transaction.dto";
 // import { GatewayType, OperationType } from "./operation.interface";
 
@@ -28,6 +29,9 @@ export class TransactionEntity {
 
     @Column({type: 'enum', enum: Status})
     status: string;
+
+    @ManyToOne(type => AccountEntity, accountRef => accountRef.transaction)
+    account: AccountEntity;
 
     @CreateDateColumn()
     createdAt: Date; 

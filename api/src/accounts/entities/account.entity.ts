@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { TransactionEntity } from "src/transactions/entities/transaction.entity";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 // import { GatewayType, OperationType } from "./operation.interface";
 
 @Entity()
@@ -20,7 +21,10 @@ export class AccountEntity {
     phoneNumber: string;
 
     @Column({type: 'double precision', default: 0.00})
-    accoountBalance: number;
+    accountBalance: number;
+
+    @OneToMany(type => TransactionEntity, transaction => transaction.account)
+    transaction: TransactionEntity;
 
     @CreateDateColumn()
     createdAt: Date;
