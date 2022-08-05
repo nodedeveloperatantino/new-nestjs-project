@@ -30,7 +30,7 @@ export class TransactionEntity {
     @Column({type: 'enum', enum: Status})
     status: string;
 
-    @ManyToOne(type => AccountEntity, accountRef => accountRef.transaction)
+    @ManyToOne(() => AccountEntity, account => account.transaction)
     account: AccountEntity;
 
     @CreateDateColumn()

@@ -44,15 +44,15 @@ export class UsersService {
         newAccount.emailId = createUserDto.email;
         newAccount.phoneNumber = createUserDto.phoneNumber;
 
-        newUser.account = newAccount;
-
         const newOperation = new OperationEntity();
         newOperation.operationType = OperationType.CAC;
 
-        newUser.operationRef = [newOperation];
+        newUser.account = newAccount;
 
-        from(this.accountRepository.save(newAccount));
-        from(this.operationRepository.save(newOperation));
+        newOperation.account = newAccount;
+
+        const createAccount = from(this.accountRepository.save(newAccount));
+        const createOperation = from(this.operationRepository.save(newOperation));
 
         const createUser = from(this.userRepository.save(newUser)).pipe(
           map((user: User) => {

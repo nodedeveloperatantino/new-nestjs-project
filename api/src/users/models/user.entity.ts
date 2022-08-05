@@ -28,8 +28,8 @@ export class UserEntity {
     @OneToOne(type => AccountEntity) @JoinColumn()
     account: AccountEntity
 
-    @OneToMany(type => OperationEntity, operationRef => operationRef.userRef)
-    operationRef: OperationEntity[];
+    // @OneToMany(type => OperationEntity, operationRef => operationRef.userRef)
+    // operationRef: OperationEntity[];
 
     @BeforeInsert()
     emailToLowerCase() {

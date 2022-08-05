@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { OperationModule } from './operation/operation.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { AccountsModule } from './accounts/accounts.module';
+import { DigitalCurrencyModule } from './digital-currency/digital-currency.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { AccountsModule } from './accounts/accounts.module';
     AuthModule,
     OperationModule,
     TransactionsModule,
-    AccountsModule
+    AccountsModule,
+    DigitalCurrencyModule
   ],
   controllers: [AppController],
   providers: [AppService, /* ...databaseProvider */],
