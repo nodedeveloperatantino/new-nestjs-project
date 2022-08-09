@@ -4,7 +4,7 @@
   "description": "For populating database automatically.",
   "main": "index.js",
   "scripts": {
-    "start": "node populateUsers/populateUsers.js",
+    "start": "node populateUsers",
     "dev": "nodemon populateUsers",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

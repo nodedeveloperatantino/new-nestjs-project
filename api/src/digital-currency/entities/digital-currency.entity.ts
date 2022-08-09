@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { AccountEntity } from "src/accounts/entities/account.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { CurrencyCode } from "../dto/CurrencyCode.enum";
 
 export enum PaymentMode {
     ONLINE = 'ONLINE',
@@ -40,7 +41,13 @@ export class DigitalCurrency {
     paymentMode: string;
 
     @Column({type: 'enum', enum: PaymentStatus, default: PaymentStatus.PENDING})
-    paymentStatus: string;
+    paymentStatus: string;          // This signifies that whether the payment has been done to Yassir or not.
+
+    @Column({type: 'enum', enum: PaymentStatus, default: PaymentStatus.PENDING})
+    transactionStatus: string;      // This signifies that the amount has been transferred to the corresponding payee or not.
+
+    @Column({type: 'enum', enum: CurrencyCode, default: CurrencyCode.INR})
+    currencyCode: CurrencyCode;
 
     @CreateDateColumn()
     createdAt: Date;

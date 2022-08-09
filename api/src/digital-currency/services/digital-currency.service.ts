@@ -22,29 +22,26 @@ export class DigitalCurrencyService {
 
   async create(createDigitalCurrencyDto: CreateDigitalCurrencyDto): Promise<Observable<DigitalCurrency | string>> {
     const newDigitalCurrency = new DigitalCurrency();
-    const createdBy = from(this.accountRepository.findOne({where: {accountId: createDigitalCurrencyDto.createdBy}})).pipe(
-      map((account: AccountEntity) => {
-        return account;
-      })
-    );
-    console.log(createdBy);
-    const createdFor = from(this.accountRepository.findOne({where: {accountId: createDigitalCurrencyDto.createdFor}})).pipe(
-      map((account: AccountEntity) => {
-        return account;
-      })
-    );;
-    console.log("Created By: ",createdBy, "Created For: ", createdFor)
+    const createdBy = await this.accountRepository.findOne({where: {accountId: createDigitalCurrencyDto.createdBy}});
+    const createdFor = await this.accountRepository.findOne({where: {accountId: createDigitalCurrencyDto.createdFor}});
+    
     newDigitalCurrency.amount = createDigitalCurrencyDto.amount;
     newDigitalCurrency.operationName = createDigitalCurrencyDto.operationName;
     newDigitalCurrency.paymentMode = createDigitalCurrencyDto.paymentMode;
-    newDigitalCurrency.createdByAccount = await this.accountRepository.findOneBy({ accountId: createDigitalCurrencyDto.createdBy });
-    newDigitalCurrency.createdForAccount = await this.accountRepository.findOneBy({ accountId: createDigitalCurrencyDto.createdFor });
-    // console.log(newDigitalCurrency);
+    newDigitalCurrency.createdByAccount = createdBy;
+    newDigitalCurrency.createdForAccount = createdFor;
+    
+    createdBy.accountBalance += +createDigitalCurrencyDto.amount;
+    from(this.accountRepository.save(createdBy));
     return from(this.currencyRepository.save(newDigitalCurrency));
   }
 
-  findAll() {
-    return `This action returns all digitalCurrency`;
+  findAll(): Observable<DigitalCurrency[] | string>  {
+    return from(this.currencyRepository.find()).pipe(
+      map((currency: DigitalCurrency[]) => {
+        return currency;
+      }),
+    );
   }
 
   findOne(id: number) {
