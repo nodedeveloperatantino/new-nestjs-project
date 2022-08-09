@@ -1,4 +1,10 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateDigitalCurrencyDto } from './create-digital-currency.dto';
+/* eslint-disable prettier/prettier */
+import { PaymentMode, PaymentStatus } from "../entities/digital-currency.entity";
 
-export class UpdateDigitalCurrencyDto extends PartialType(CreateDigitalCurrencyDto) {}
+export interface UpdateDigitalCurrencyDto {
+    amountCreated?: number;
+    createdFor?: string;
+    createdBy?: string;
+    paymentMode?: PaymentMode;
+    paymentStatus?: PaymentStatus;
+}

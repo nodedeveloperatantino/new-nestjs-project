@@ -26,6 +26,7 @@ export class UsersController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto): Observable<User | Object> {
+    console.log(createUserDto);
     return this.usersService.create(createUserDto).pipe(
       map((user: User) => user), catchError(err => of({error: err.message}))
     )

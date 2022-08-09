@@ -20,7 +20,8 @@ import { DigitalCurrencyModule } from './digital-currency/digital-currency.modul
       type: 'postgres',
       url: process.env.DATABASE_URL,
       autoLoadEntities: true,
-      synchronize: true
+      synchronize: true,
+      logging: ['query', 'error']
     }),
     UsersModule,
     AuthModule,
