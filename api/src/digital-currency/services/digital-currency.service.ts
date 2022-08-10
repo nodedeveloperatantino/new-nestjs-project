@@ -3,8 +3,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, map, Observable } from 'rxjs';
 import { AccountEntity } from 'src/accounts/entities/account.entity';
-import { Operation } from 'src/operation/entities/operation.entity';
 import { Repository } from 'typeorm';
+import { OperationEntity } from '../../operation/models/operation.entity';
 import { CreateDigitalCurrencyDto } from '../dto/create-digital-currency.dto';
 import { UpdateDigitalCurrencyDto } from '../dto/update-digital-currency.dto';
 import { DigitalCurrency } from '../entities/digital-currency.entity';
@@ -14,8 +14,8 @@ export class DigitalCurrencyService {
   constructor(
     @InjectRepository(DigitalCurrency)
     private readonly currencyRepository: Repository<DigitalCurrency>,
-    @InjectRepository(Operation)
-    private readonly operationRepository: Repository<Operation>,
+    @InjectRepository(OperationEntity)
+    private readonly operationRepository: Repository<OperationEntity>,
     @InjectRepository(AccountEntity)
     private readonly accountRepository: Repository<AccountEntity>,
   ) {}
